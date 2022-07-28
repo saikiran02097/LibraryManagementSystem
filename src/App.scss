@@ -1,0 +1,22 @@
+.App {
+  text-align: center;
+}
+
+.mainContainer {
+  min-height: 100vh;
+  display: flex;
+  overflow-y: auto;
+  .leftContent {
+    min-width: 14vw;
+    background-color: #111827;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    .logo {
+      height: 10rem;
+    }
+  }
+  .rightContent {
+    min-width: 86vw;
+  }
+}
