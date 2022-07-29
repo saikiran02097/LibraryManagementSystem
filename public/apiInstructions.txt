@@ -3,3 +3,77 @@ method-POST
 
 http://localhost:8080/books --- api to fetch the list of books
 method-GET
+
+http://localhost:8080/books/add -- api to create a book and returns updated list of books
+method-POST
+payload----
+{
+        "isbn": 1234,
+        "bookName": "JAVA",
+        "author": "SMITH",
+        "originalStock": 15,
+        "inStock": 15,
+        "lastUpdatedDate": "29-07-2022"
+}
+
+http://localhost:8080/books/increaseStock --- api to increase particular book stock by a number and returns updated list of books
+method:POST
+payload---
+{
+        "isbn": 5785,
+        "bookName": "JAVA",
+        "author": "SMITH",
+        "originalStock": 15,
+        "inStock": 15,
+        "lastUpdatedDate": "29-07-2022",
+        "temporaryStock":5
+}
+
+http://localhost:8080/books/decreaseStock --- api to decrease particular book stock by a number and returns updated list of books and checks while decreasing the stock if instock < tempStock will return []
+method:POST
+payload---
+{
+        "isbn": 5785,
+        "bookName": "JAVA",
+        "author": "SMITH",
+        "originalStock": 15,
+        "inStock": 15,
+        "lastUpdatedDate": "29-07-2022",
+        "temporaryStock":5
+}
+
+http://localhost:8080/books/getBookByISBN/5785 --- api to get a book details by ISBN no
+method:GET
+
+http://localhost:8080/books/getBookByName/JAVA --- api to get a list of books by bookName
+method:GET
+
+http://localhost:8080/orders/issueBook --- api to issue a book to a student
+method:POST
+
+payload---
+{
+	"isbn": 5785,
+    "studentId": 123,
+    "issuedBy": "STAURT",
+    "issueDate":"29-07-2022",
+    "inStock": 15,
+    "lastUpdatedDate": "29-07-2022"
+}
+
+http://localhost:8080/orders/collectBook --- api to collect a book from a student
+method:POST
+payload---
+{
+	"isbn": 5785,
+    "studentId": 123,
+    "issuedBy": "STAURT",
+    "issueDate":"29-07-2022",
+    "inStock": 14,
+    "lastUpdatedDate": "29-07-2022"
+}
+
+http://localhost:8080/orders/getStudentHistory/123/issued --- api to fetch student history of books based on status returns array of books
+method:GET
+
+
