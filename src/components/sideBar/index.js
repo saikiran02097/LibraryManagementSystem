@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import './sideBar.scss';
 import LOGO from "../../assets/logo.jpg";
+import { Paper } from '@material-ui/core';
 
 const routes = [
     {
@@ -24,9 +25,12 @@ const routes = [
 const sideBar = () => {
     return (
         <div className='leftContent'>
-            <div >
-                <img src={LOGO} alt="Logo" className="logo"/>
-            </div>
+            <Paper elevation={0} >
+                <img src={LOGO} alt="Logo" className="logo" />
+            </Paper>
+            {/* <div>
+                <img src={LOGO} alt="Logo" className="logo" />
+            </div> */}
             <ul className='menuContainer'>
                 {
                     routes.map(({ path, iconClass, name }, key) => (<li className='menuItem' key={key}>

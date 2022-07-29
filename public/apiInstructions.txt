@@ -1,0 +1,5 @@
+http://localhost:8080/user/disableUser/456 ---api to update user status to inactive
+method-POST
+
+http://localhost:8080/books --- api to fetch the list of books
+method-GET

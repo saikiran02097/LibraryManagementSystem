@@ -6,6 +6,8 @@ import Profile from "./components/profile";
 import App from "./App";
 import UserManagement from "./components/dashboard/userManagement";
 import BookManagement from "./components/dashboard/bookManagement";
+import IssueBook from "./components/dashboard/issueBook";
+import CollectBook from "./components/dashboard/collectBook";
 
 const NotFound = () => <div>route not defined</div>
 
@@ -21,8 +23,8 @@ function Root() {
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/manageusers" element={<UserManagement />} />
                     <Route path="/managebooks" element={<BookManagement />} />
-                    <Route path="/issuebook" element={<NotFound />} />
-                    <Route path="/collectbooks" element={<NotFound />} />
+                    <Route path="/issuebook" element={<IssueBook />} />
+                    <Route path="/collectbooks" element={<CollectBook />} />
                 </Route>
                 <Route path="*" element={<NotFound />} />
             </Routes>

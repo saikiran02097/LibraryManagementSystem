@@ -1,46 +1,48 @@
 import React, { useState } from 'react';
-import Table, { StyledTableCell, StyledTableRow } from '../../table';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import { TextField, InputAdornment, Dialog, DialogContent, DialogTitle, DialogActions, DialogContentText, Button } from "@material-ui/core";
 import ClearIcon from '@material-ui/icons/Clear';
-import "./userManagement.scss";
+import Table, { StyledTableCell, StyledTableRow } from '../../table';
 
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
+function createData(author, name, isbn, issued, stock) {
+    return { isbn, name, author, issued, stock };
 }
 
 const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
+    createData('Frozen yoghurt', "abc", 98498, 24, 30),
+    createData('Ice cream sandwich', "def", 2783156, 37, 40),
+    createData('Eclair', "ghi", 2746354, 24, 30),
+    createData('Cupcake', "jkl", 257465135, 67, 75),
+    createData('Gingerbread', "mno", 2763385, 49, 60),
 ];
 
 const columns = [
     {
         align: "left",
-        title: "Student Name"
+        title: "Book Name"
     },
     {
         align: "center",
-        title: "Student Id"
+        title: "ISBN"
     },
     {
         align: "center",
-        title: "Phone Number"
-    },
+        title: "Author"
+    },    
     {
         align: "center",
-        title: "Email Id"
-    },
+        title: "Issue Date"
+    },    
+    {
+        align: "center",
+        title: "Penalty"
+    },    
     {
         align: "center",
         title: "Action(s)"
     }
 ]
 
-const UserManagement = () => {
+const CollectBook = () => {
     const [text, setText] = useState("");
     const [open, setOpen] = useState(false);
 
@@ -70,11 +72,12 @@ const UserManagement = () => {
                         <StyledTableCell align="left">
                             {row.name}
                         </StyledTableCell>
-                        <StyledTableCell align="center">{row.calories}</StyledTableCell>
-                        <StyledTableCell align="center">{row.fat}</StyledTableCell>
-                        <StyledTableCell align="center">{row.carbs}</StyledTableCell>
+                        <StyledTableCell align="center">{row.isbn}</StyledTableCell>
+                        <StyledTableCell align="center">{row.author}</StyledTableCell>
+                        <StyledTableCell align="center">{row.issued}</StyledTableCell>
+                        <StyledTableCell align="center">{row.stock}</StyledTableCell>
                         <StyledTableCell align="center">
-                            <DeleteForeverIcon onClick={toggleModal} />
+                            <Button variant='outlined' onClick={toggleModal} >Collect</Button>
                         </StyledTableCell>
                     </StyledTableRow>
                 ))}
@@ -83,13 +86,7 @@ const UserManagement = () => {
                 open={open}
                 onClose={toggleModal}
             >
-                <DialogTitle id="alert-dialog-title">{"Do you want to delete the student?"}</DialogTitle>
-                {/* <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        Let Google help apps determine location. This means sending anonymous location data to
-                        Google, even when no apps are running.
-                    </DialogContentText>
-                </DialogContent> */}
+                <DialogTitle id="alert-dialog-title">{"Do you want to collect the book?"}</DialogTitle>
                 <DialogActions>
                     <Button onClick={toggleModal} color="primary">
                         No
@@ -103,4 +100,4 @@ const UserManagement = () => {
     )
 }
 
-export default UserManagement
+export default CollectBook
