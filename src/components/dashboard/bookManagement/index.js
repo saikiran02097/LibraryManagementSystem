@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import IndeterminateCheckBoxIcon from "@material-ui/icons/IndeterminateCheckBox";
 import SearchIcon from "@material-ui/icons/Search";
-import Table, { StyledTableCell, StyledTableRow } from "../../table";
+// import Table, { StyledTableCell, StyledTableRow } from "../../table";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import AddIcon from "@material-ui/icons/Add";
 import ClearIcon from "@material-ui/icons/Clear";
@@ -42,47 +42,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function createData(author, name, isbn, issued, stock) {
-  return { isbn, name, author, issued, stock };
-}
-
-const rows = [
-  createData("Frozen yoghurt", "abc", 98498, 24, 30),
-  createData("Ice cream sandwich", "def", 2783156, 37, 40),
-  createData("Eclair", "ghi", 2746354, 24, 30),
-  createData("Cupcake", "jkl", 257465135, 67, 75),
-  createData("Gingerbread", "mno", 2763385, 49, 60),
-];
-
-const columns = [
-  {
-    align: "left",
-    title: "Book Name",
-  },
-  {
-    align: "center",
-    title: "ISBN",
-  },
-  {
-    align: "center",
-    title: "Author",
-  },
-  {
-    align: "center",
-    title: "#issued",
-  },
-  {
-    align: "center",
-    title: "Stock",
-  },
-  {
-    align: "center",
-    title: "Action(s)",
-  },
-];
 
 const BookManagement = () => {
   const classes = useStyles();
+  //defining state variables and setter func
   const [bookISBN, setBookISBN] = useState("");
   const [bookDetails, setBookDetails] = useState({});
   const [isAddBookOpen, setIsAddBookOpen] = useState(false);
@@ -96,9 +59,13 @@ const BookManagement = () => {
     const book = {
       ...data,
       temporaryStock: 0,
-      originalStock: data.temporaryStock,
-      inStock: data.temporaryStock,
+      isbn: Number(data.isbn),
+      originalStock: Number(data.temporaryStock),
+      inStock: Number(data.temporaryStock),
+      rackNo: "1545"
     };
+
+    //api call addin new book 
     setIsAddBookOpen(false);
     postAPICall(`${urls.addBook}`, book)
       .then((res) => {
@@ -115,6 +82,7 @@ const BookManagement = () => {
       });
   };
 
+  //api call for  incrementing stock
   const incrementBookStock = (data) => {
     const book = {
       ...data,
@@ -137,6 +105,7 @@ const BookManagement = () => {
       });
   };
 
+  //api call for  decrement stock
   const decrementBookStock = (data) => {
     const book = {
       ...data,
@@ -160,18 +129,20 @@ const BookManagement = () => {
   };
 
   const handleChange = (event) => {
-    setBookISBN(event.target.value);
+    setBookISBN(event.target.value);//search bar
   };
 
+  //popup open for add book
   const handleAddBook = () => {
     setIsAddBookOpen(true);
   };
 
-  const getStudentBooks = () => {
+  // apicall for getting the book detais when user clicks on searchicon
+  const getBooks = () => {
     getAPICall(`${urls.getBooksByISBN}/${bookISBN}`).then((res) => {
-      console.log("response",res)
+      console.log("response", res)
       setBookDetails({
-        isbn: 1234567890,
+        isbn: 5785,
         bookName: "JAVA",
         author: "SMITH",
         originalStock: 15,
@@ -179,6 +150,8 @@ const BookManagement = () => {
         lastUpdatedDate: "29-07-2022",
         temporaryStock: 0,
       });
+    }).catch((err) => {
+      console.log("error", err)
     });
   };
 
@@ -187,7 +160,7 @@ const BookManagement = () => {
       {messageData.message && (
         <Snackbar
           open={true}
-          autoHideDuration={6000}
+          autoHideDuration={6000}//millisec for autohide
           onClose={() => setMessageData({ message: "" })}
         >
           <Alert
@@ -207,14 +180,15 @@ const BookManagement = () => {
         onChange={handleChange}
         value={bookISBN}
         InputProps={{
+          // placing icons at end 
           endAdornment: (
-            <InputAdornment position="end">
+            <InputAdornment position="start">
               {bookISBN && (
                 <>
                   <ClearIcon onClick={() => setBookISBN("")} />
                   <SearchIcon
                     onClick={() => {
-                      getStudentBooks();
+                      getBooks();
                     }}
                   />
                 </>
@@ -243,6 +217,7 @@ const BookManagement = () => {
             <Grid xs={2}>
               <Typography>Increment Stock</Typography>
               <Button>
+
                 <AddBoxIcon
                   style={{ color: "green" }}
                   onClick={() => setIsIncrementBookStockOpen(true)}

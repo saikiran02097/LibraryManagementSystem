@@ -47,7 +47,7 @@ export const BookDetailsPopup = ({
   const [temporaryStock, setTemporaryStock] = useState(0);
 
   const handleConfirm = () => {
-    callBack({ bookName, isbn, author, temporaryStock });
+    callBack({ bookName , isbn, author, temporaryStock });
   };
 
   const handleStockChange = (e) => {

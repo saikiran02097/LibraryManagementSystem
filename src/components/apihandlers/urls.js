@@ -7,4 +7,5 @@ export default {
   addBook: "/books/add",
   incrementBookStock: "/books/increaseStock",
   decrementBookStock: "/books/decreaseStock",
+  disableUser:"/user/disableUser"
 };

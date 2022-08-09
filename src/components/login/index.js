@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react';
-// import { useHistory } from "react-router-dom";
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { TextField, InputAdornment, Button, makeStyles, Typography } from "@material-ui/core";
-// import { Context } from "../../store";
+import { Context } from "../../appContext/wrapper";;
 
 const useStyles = makeStyles(theme => ({
-    root: {        
+    root: {
         backgroundImage: "url(https://demos.creative-tim.com/material-dashboard-pro-react/static/media/lock.9a41f1d5.jpeg)",
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -89,7 +89,8 @@ const useStyles = makeStyles(theme => ({
 
 export function Login() {
     const classes = useStyles();
-    // const history = useHistory();
+    const [data, dispatch] = useContext(Context);
+    const navigate = useNavigate();
     const [state, setState] = useState({
         username: "",
         password: "",
@@ -97,7 +98,11 @@ export function Login() {
         error: false
     });
 
-    // const [data, dispatch] = useContext(Context);
+    useEffect(() => {
+        dispatch({
+            type: "logOut"
+        });
+    }, []);
 
     const handleChange = (name, e) => {
         setState(prevState => ({ ...prevState, [name]: e.target.value }))
@@ -108,24 +113,10 @@ export function Login() {
     };
 
     const handleLogin = () => {
-        // const { username, password } = state;
-        // if (username && username === "admin" && password && password === "admin") {
-        //     dispatch({ type: "loginSuccess" });
-        //     history.push("/");
-        // } else {
-        //     setState(prevState => ({ ...prevState, error: true }));
-        //     let message = "Invalid Username/Password", mode = "error";
-        //     if (!username || !password) {
-        //         message = "Please Enter your Credentials";
-        //         mode = "warning";
-        //     }
-        //     dispatch({
-        //         type: "showSnack",
-        //         message,
-        //         mode,
-        //         autoHide: null,
-        //     })
-        // }
+        dispatch({
+            type: "loginSuccess"
+        });
+        navigate("/dashboard");
     }
 
     return (

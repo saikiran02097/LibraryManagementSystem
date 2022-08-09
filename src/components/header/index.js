@@ -32,7 +32,7 @@ export const Header = () => {
             <AppBar position="static" className={classes.container}>
                 <Toolbar>
                     <Typography variant="h6" className={classes.title}>
-                        Dashboard
+                        Admin
                     </Typography>
                     <div>
                         <IconButton

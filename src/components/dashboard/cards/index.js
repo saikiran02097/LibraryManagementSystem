@@ -26,7 +26,7 @@ const CustomCard = ({ image, path, name }) => {
                 component="img"
                 image={image}
                 alt="user"
-                style={{ width: "100%", maxHeight: "12rem" }}
+                style={{ width: "100%", maxHeight: "11rem" }}
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">

@@ -1,27 +1,37 @@
 export const getAPICall = async (url) => {
-  // return new Promise((resolve, reject) => resolve());
-  const prom = await fetch(`${url}`, {
+  return new Promise((resolve, reject) => resolve());
+  const prom = await fetch(url, {
     mode: 'cors',
     headers: {
       'Access-Control-Allow-Origin': '*'
     }
-  }).then((res) =>
-    res.json()
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error('Something went wrong');
+    }
+    return response.json();
+  }
   );
-  //   const prom = await fetch(`http://localhost:8080${url}`).then(res => res.json());
   return prom;
 };
 
 export const postAPICall = async (url, payload) => {
   return new Promise((resolve, reject) => resolve());
-  const prom = await fetch(`http://localhost:8080${url}`, {
-    method: "post",
-    body: payload,
+  const prom = await fetch(url, {
+    method: "POST",
+    body: JSON.stringify(payload),
     mode: 'cors',
     headers: {
-      'Access-Control-Allow-Origin': '*'
+      'Access-Control-Allow-Origin': '*',
+      'content-type': 'application/json'
     }
-  }).then((res) => res.json());
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error('Something went wrong');
+    }
+    return response.json();
+  }
+  );
   return prom;
 };
 

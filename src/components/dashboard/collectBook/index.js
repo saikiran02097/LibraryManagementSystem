@@ -3,10 +3,8 @@ import {
   TextField,
   InputAdornment,
   Dialog,
-  DialogContent,
   DialogTitle,
   DialogActions,
-  DialogContentText,
   Button,
   Snackbar,
 } from "@material-ui/core";
@@ -67,15 +65,18 @@ const CollectBook = () => {
     setStudentId(event.target.value);
   };
 
+  // to display and hide confirmation popup
   const toggleModal = () => {
     setOpen((prevOpen) => !prevOpen);
   };
 
+  //
   const handleCollect = (book) => {
     setSelectedBook(book);
     toggleModal();
   };
 
+  //api call to update the status of the book which we are collecting
   const handleCollectBook = () => {
     postAPICall(`${urls.collectBook}`, selectedBook)
       .then((res) => {
@@ -84,7 +85,6 @@ const CollectBook = () => {
           type: "success",
         });
         setOpen(false);
-        // rows.shift();
         getStudentBooks();
       })
       .catch((err) => {
@@ -96,6 +96,7 @@ const CollectBook = () => {
       });
   };
 
+  //apicall to fetch the list of books issued to student
   const getStudentBooks = () => {
     getAPICall(`${urls.getStudentBooks}/${studentId}/issued`).then((res) => {
       setBooks(rows);

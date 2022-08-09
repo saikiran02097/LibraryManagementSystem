@@ -42,6 +42,7 @@ const IssueBook = () => {
   const [studentDetails, setStudentDetails] = useState({});
   const [bookDetails, setBookDetails] = useState({});
 
+// api call for getting book details 
   const getBookDetails = () => {
     getAPICall(`${urls.getBooksByISBN}/${bookISBN}`).then((res) => {
       setBookDetails({
@@ -56,6 +57,7 @@ const IssueBook = () => {
     });
   };
 
+  // apicall for getting student details
   const getStudentDetails = () => {
     getAPICall(`${urls.getStudentByID}/${studentId}`).then((res) => {
       setStudentDetails({
@@ -66,6 +68,7 @@ const IssueBook = () => {
     });
   };
 
+  //api call for updating student issue table
   const handleIssueBook = () => {
     postAPICall(`${urls.issueBook}`, {
       isbn: bookISBN,
@@ -110,14 +113,13 @@ const IssueBook = () => {
           style={{ margin: "1rem 0" }}
           InputProps={{
             endAdornment: (
-              <InputAdornment position="end">
+              <InputAdornment position="end" variant="filled">
                 {studentId && (
                   <>
                     <ClearIcon onClick={() => setStudentId("")} />
                     <SearchIcon
                       onClick={() => {
                         getStudentDetails();
-                        // setStudentId("");
                       }}
                     />
                   </>
@@ -146,7 +148,7 @@ const IssueBook = () => {
                     <SearchIcon
                       onClick={() => {
                         getBookDetails();
-                        // setBookISBN("");
+                       
                       }}
                     />
                   </>
@@ -205,7 +207,7 @@ const IssueBook = () => {
           color="primary"
           onClick={handleIssueBook}
           disabled={!bookDetails.isbn || !studentDetails.id}
-        >
+           >
           Issue Book
         </Button>
       </Grid>

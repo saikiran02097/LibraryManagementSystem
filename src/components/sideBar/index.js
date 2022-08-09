@@ -19,7 +19,13 @@ const routes = [
         path: "/logout",
         iconClass: "fa-solid fa-right-from-bracket",
         name: "Logout"
+    },
+    {
+        path:"/studentdashboard",
+        iconClass: "fa-solid fa-right-from-bracket",
+        name: "studentdashboard"
     }
+    
 ]
 
 const sideBar = () => {
@@ -28,9 +34,6 @@ const sideBar = () => {
             <Paper elevation={0} >
                 <img src={LOGO} alt="Logo" className="logo" />
             </Paper>
-            {/* <div>
-                <img src={LOGO} alt="Logo" className="logo" />
-            </div> */}
             <ul className='menuContainer'>
                 {
                     routes.map(({ path, iconClass, name }, key) => (<li className='menuItem' key={key}>
